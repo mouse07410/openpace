@@ -4,12 +4,12 @@ matrix:
   include:
     - os: osx
       compiler: clang
-      env: TARGET=osx
+      env: TARGET=osx ENABLE_OPENSSL_INSTALL=--enable-openssl-install
     - compiler: gcc
       env: DO_CODECOV=yes
     - env: DO_COVERITY_SCAN=yes
-    - env: TARGET=win WIN_TOOL=i686-w64-mingw32
-    - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
+    - env: TARGET=win WIN_TOOL=i686-w64-mingw32 ENABLE_OPENSSL_INSTALL=--enable-openssl-install
+    - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32 ENABLE_OPENSSL_INSTALL=--enable-openssl-install
     - env: TARGET=emscripten
 
 env:
@@ -78,7 +78,7 @@ before_script:
       export ENABLE_GO=--enable-go;
       export GCCGOFLAGS="-static-libgcc $CFLAGS";
     fi
-  - ./configure --enable-openssl-install --enable-python --enable-java --enable-ruby $ENABLE_GO;
+  - ./configure $ENABLE_OPENSSL_INSTALL --enable-python --enable-java --enable-ruby $ENABLE_GO;
   # Optionally try to upload to Coverity Scan
   # On error (propably quota is exhausted), just continue
   - if [ -n "${DO_COVERITY_SCAN}" ]; then curl -s 'https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh' | bash || true; fi
