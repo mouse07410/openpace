@@ -51,7 +51,7 @@ addons:
       - ruby-dev
       - swig
       - xutils-dev
-      - libssl-dev
+      - libssl1-dev
 
 before_install:
   - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
