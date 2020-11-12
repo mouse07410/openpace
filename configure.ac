@@ -299,6 +299,7 @@ AC_CONFIG_FILES([
                  bindings/ruby/Makefile
                  bindings/go/Makefile
                  cross/Makefile
+		 libeac.pc
                  ])
 AC_OUTPUT
 
